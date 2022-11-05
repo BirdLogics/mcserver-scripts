@@ -12,3 +12,6 @@ cause inventory loss.
 ## fkadv
 Adds a command which allows players to create a fake advancement
 which is displayed in chat.
+
+## t
+An alternate communication method for if chat is disabled on  server. Used on Minehut during the log4j incident.
