@@ -51,6 +51,12 @@ __on_player_connects(target) -> (
     scoreboard('scarpet_stat', target, value);
 );
 
+__on_player_disconnects(target, _) -> (
+    // Clear the leaderboard for the player
+    // Bedrock shows the full leaderboard before with the player list
+    scoreboard('scarpet_stat', target, null);
+);
+
 __config() -> {
     'scope' -> 'global',
     'command_permission' -> 'ops',
