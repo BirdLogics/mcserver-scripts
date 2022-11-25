@@ -1,6 +1,7 @@
 global_plag_started = false;
 
 run_command() -> (
+    logger(str('plag: Used by %s.', player()~'name'));
     print_count();
 );
 
