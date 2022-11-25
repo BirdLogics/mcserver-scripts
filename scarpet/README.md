@@ -18,3 +18,6 @@ An alternate communication method for if chat is disabled on  server. Used on Mi
 
 ## autoview
 Automatically adjusts the render distance depending on the number of people online.
+
+## plag
+Counts the number of entities around each player.
