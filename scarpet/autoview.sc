@@ -3,7 +3,7 @@ __on_player_connects(_) -> (
 );
 
 __on_player_disconnects(_, _) -> (
-    update_view_distance();
+    schedule(20, 'update_view_distance');
 );
 
 update_view_distance() -> (
