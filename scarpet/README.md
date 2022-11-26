@@ -21,3 +21,6 @@ Automatically adjusts the render distance depending on the number of people onli
 
 ## plag
 Counts the number of entities around each player.
+
+## afk
+Allows players to afk using bots. Will kick afk bots when the server lags for too long.
