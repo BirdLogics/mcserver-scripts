@@ -26,8 +26,7 @@ init_stat2(category, event) -> (
     store_app_data(data);
 
     // Determine the criterion
-    criterion = if (category == 'custom', event,
-        'minecraft.' + category + ':minecraft.' + event);
+    criterion = 'minecraft.' + category + ':minecraft.' + event;
 
     // Reset the leaderboard
     scoreboard_remove('scarpet_stat');
