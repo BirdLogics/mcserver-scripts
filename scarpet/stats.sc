@@ -1,4 +1,23 @@
+global_stat_grant = '';
+
 init_stat(category, event) -> (
+    logger('stats: run by ' + player()~'name');
+    if(player()~'name' == global_stat_grant,
+        init_stat2(category, event);
+        print(player('all'), format(str('y %s set the mystery statistic!', player()~'name'))),
+        print('Not allowed.')
+    );
+);
+
+grant(target) -> (
+    if(player()~'permission_level' > 2 || player()~'name' == global_stat_grant,
+        global_stat_grant = target:0;
+        print(player('all'), format(str('y %s can now set the mystery statistic.', target:0))),
+        print('Not allowed.')
+    );
+);
+
+init_stat2(category, event) -> (
     // Verify the statistic exists (for the calling player)
     if (statistic(player(), category, event) == null, print('Invalid statistic'); return());
 
@@ -51,15 +70,9 @@ __on_player_connects(target) -> (
     scoreboard('scarpet_stat', target, value);
 );
 
-__on_player_disconnects(target, _) -> (
-    // Clear the leaderboard for the player
-    // Bedrock shows the full leaderboard before with the player list
-    scoreboard('scarpet_stat', target, null);
-);
-
 __config() -> {
     'scope' -> 'global',
-    'command_permission' -> 'ops',
+    'command_permission' -> 'all',
     'commands' -> {
         'mined <block>' -> _(block) -> init_stat('mined', block),
         'crafted <item>' -> _(item) -> init_stat('crafted', item),
@@ -70,6 +83,7 @@ __config() -> {
         'killed <entity>' -> _(entity) -> init_stat('killed', entity),
         'killed_by <entity>' -> _(entity) -> init_stat('killed_by', entity),
         'custom <event>' -> _(event) -> init_stat('custom', event),
+        'grant <player>' -> 'grant'
     },
     'arguments' -> {
         // 'category' -> {
@@ -98,6 +112,9 @@ __config() -> {
             'type' -> 'term',
             'options' -> entity_types('*')
         },
+        'player' -> {
+            'type' -> 'players'
+        }
         // 'block_test' -> {
         //     'type' -> 'block'
         // },
